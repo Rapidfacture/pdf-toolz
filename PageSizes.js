@@ -10,7 +10,12 @@ class PageSize {
 
 function getPageSize (page) {
     const [x, y, w, h] = page.pageInfo.view;
-    return new PageSize(w - x, h - y);
+    const width = w - x;
+    const height = h - y;
+    const rotate = page.pageInfo.rotate;
+    // Consider rotation
+    return (rotate === 90 || rotate === 270)
+        ? new PageSize(height, width) : new PageSize(width, height);
 }
 
 /**
