@@ -7,7 +7,7 @@ const {requireExecutable} = require('./Utils');
 
 requireExecutable('convert');
 
-async function convertPDFToJPG (pdfBuf, imgtype = 'jpg', dpi = 200) {
+async function pdfToImage (pdfBuf, imgtype = 'jpg', dpi = 200) {
     return WithTmpDir(async (tmpdir) => {
         const srcpath = path.join(tmpdir, 'in.pdf');
         const outpath = path.join(tmpdir, `out-%04d.${imgtype}`);
@@ -22,17 +22,11 @@ async function convertPDFToJPG (pdfBuf, imgtype = 'jpg', dpi = 200) {
         const imgPaths = imgs.map(img => path.join(tmpdir, img));
         const imgPromises = imgPaths.map(img => fs.readFile(img));
         return Promise.all(imgPromises);
-    }, { unsafeCleanup: true, prefix: 'pdfoverlay-pdf2jpg-' });
-}
-
-async function test () {
-    const pdfData = await fs.readFile('multipage.pdf');
-    const jpgs = await convert(pdfData);
-    await fs.writeFile('out.jpg', jpgs[0]);
+    }, { unsafeCleanup: true, prefix: 'pdfoverlay-pdf2img-' });
 }
 
 // test().then(console.log).catch(console.error);
 
 module.exports = {
-    convertPDFToJPG: convertPDFToJPG
+    pdfToImage: pdfToImage
 };
