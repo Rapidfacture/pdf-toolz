@@ -1,5 +1,5 @@
 # pdf-toolz
-NodeJS PDF utilities
+NodeJS PDF utilities. Requires NodeJS 7+ due to *async/await* support
 
 ## Installation
 
