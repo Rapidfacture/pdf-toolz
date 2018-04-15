@@ -1,6 +1,6 @@
 const expect = require('chai').expect;
 const fs = require('mz/fs');
-const {readPDFPageSizes, PageSize} = require('../PageSizes');
+const {readPDFPageSizes, PageSize, convertInchToMM, convertPtToMM, convertPtToInch} = require('../PageSizes');
 
 describe('PageSize', function () {
     describe('readPDFPageSizes', function () {
@@ -55,6 +55,24 @@ describe('PageSize', function () {
                 new PageSize(595, 842),
                 new PageSize(595, 842)
             ]);
+        });
+    });
+    describe('convertPtToInch', function () {
+        it('should convert pt to inch', async function () {
+            expect(convertPtToInch(595)).to.be.closeTo(8.26389, 0.01);
+            expect(convertPtToInch(842)).to.be.closeTo(11.6944, 0.01);
+        });
+    });
+    describe('convertPtToMM', function () {
+        it('should convert pt to mm', async function () {
+            expect(convertPtToMM(595)).to.be.closeTo(210, 0.1);
+            expect(convertPtToMM(842)).to.be.closeTo(297, 0.1);
+        });
+    });
+    describe('convertInchToMM', function () {
+        it('should convert inch to mm', async function () {
+            expect(convertInchToMM(1)).to.be.closeTo(25.4, 0.001);
+            expect(convertInchToMM(10)).to.be.closeTo(254.0, 0.001);
         });
     });
 });
