@@ -25,7 +25,7 @@ function getPageSize (page, ignoreRotation = false) {
  * @param opts ignoreRotation If true, ignore the rotation when computing the page size
  * @return Promise of array of PageSize objects
  */
-async function readPDFPageSizes (buffer, opts = {}) {
+async function pdfPageSizes (buffer, opts = {}) {
     const ignoreRotation = opts.ignoreRotation || false;
 
     const pdf = await pdfjs.getDocument({data: buffer});
@@ -47,7 +47,7 @@ function convertPtToMM (pt) {
 }
 
 module.exports = {
-    readPDFPageSizes: readPDFPageSizes,
+    pdfPageSizes: pdfPageSizes,
     PageSize: PageSize,
     convertPtToInch: convertPtToInch,
     convertInchToMM: convertInchToMM,
