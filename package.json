@@ -26,8 +26,14 @@
   "homepage": "https://github.com/Rapidfacture/pdf-utils#readme",
   "dependencies": {
     "bereich": "^1.0.0",
+    "lodash": "^4.17.5",
     "mz": "^2.7.0",
     "shelljs": "^0.8.1",
     "with-tmp-dir-promise": "^1.0.1"
+  },
+  "devDependencies": {
+    "chai": "^4.1.2",
+    "file-type": "^7.6.0",
+    "mocha": "^5.1.0"
   }
 }
