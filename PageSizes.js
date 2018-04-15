@@ -8,13 +8,13 @@ class PageSize {
     }
 }
 
-function getPageSize (page) {
+function getPageSize (page, ignoreRotation = false) {
     const [x, y, w, h] = page.pageInfo.view;
     const width = w - x;
     const height = h - y;
     const rotate = page.pageInfo.rotate;
     // Consider rotation
-    return (rotate === 90 || rotate === 270)
+    return !ignoreRotation && (rotate === 90 || rotate === 270)
         ? new PageSize(height, width) : new PageSize(width, height);
 }
 
@@ -22,9 +22,12 @@ function getPageSize (page) {
  * Adapted from
  * https://techoverflow.net/2018/04/13/extract-pdf-page-sizes-using-pdfjs-nodejs/
  * @param {Buffer} buffer A buffer of the PDF
+ * @param opts ignoreRotation If true, ignore the rotation when computing the page size
  * @return Promise of array of PageSize objects
  */
-async function readPDFPageSizes (buffer) {
+async function readPDFPageSizes (buffer, opts = {}) {
+    const ignoreRotation = opts.ignoreRotation || false;
+
     const pdf = await pdfjs.getDocument({data: buffer});
     const numPages = pdf.numPages;
 
@@ -34,7 +37,7 @@ async function readPDFPageSizes (buffer) {
     // Wait until all pages have been read
     const pages = await Promise.all(promises);
     // You can do something with pages here.
-    return pages.map(getPageSize);
+    return pages.map(page => getPageSize(page, ignoreRotation));
 }
 
 function convertPtToInch (pt) { return pt / 72; }
