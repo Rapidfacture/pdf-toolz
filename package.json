@@ -1,0 +1,33 @@
+{
+  "name": "pdf-utils",
+  "version": "1.0.0",
+  "description": "NodeJS PDF utilities",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Rapidfacture/pdf-utils.git"
+  },
+  "keywords": [
+    "PDF",
+    "Split",
+    "Combine",
+    "Overlay",
+    "pdftk",
+    "gs"
+  ],
+  "author": "Rapidfacture GmbH",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/Rapidfacture/pdf-utils/issues"
+  },
+  "homepage": "https://github.com/Rapidfacture/pdf-utils#readme",
+  "dependencies": {
+    "bereich": "^1.0.0",
+    "mz": "^2.7.0",
+    "shelljs": "^0.8.1",
+    "with-tmp-dir-promise": "^1.0.1"
+  }
+}
