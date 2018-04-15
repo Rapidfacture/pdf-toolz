@@ -1,17 +1,17 @@
-# pdf-utils
+# pdf-toolz
 NodeJS PDF utilities
 
 ## Installation
 
 ```sh
-npm install mz pdf-utils
+npm install mz pdf-toolz
 ```
 
 ### Reading PDF page sizes
 
 ```js
 const fs = require('mz/fs');
-const {readPDFPageSizes} = require('pdf-utils/PageSizes');
+const {readPDFPageSizes} = require('pdf-toolz/PageSizes');
 
 async function readPageSizes() {
     const pdf = await fs.readFile('test/portrait-singlepage.pdf');
@@ -26,7 +26,7 @@ readPageSizes()
 
 ```js
 const fs = require('mz/fs');
-const {pdfToImage} = require('pdf-utils/PDF2Image');
+const {pdfToImage} = require('pdf-toolz/PDF2Image');
 
 async function exportPageImages() {
     const pdf = await fs.readFile('test/portrait-singlepage.pdf');
@@ -44,7 +44,7 @@ exportPageImages()
 
 ```js
 const fs = require('mz/fs');
-const {splitPDF} = require('pdf-utils/SplitCombine');
+const {splitPDF} = require('pdf-toolz/SplitCombine');
 
 async function splitPDFIntoPages() {
     const pdf = await fs.readFile('test/portrait-multipage.pdf');
@@ -62,7 +62,7 @@ splitPDFIntoPages()
 
 ```js
 const fs = require('mz/fs');
-const {combinePDF} = require('pdf-utils/SplitCombine');
+const {combinePDF} = require('pdf-toolz/SplitCombine');
 
 async function combinePDFs() {
     // Read two PDFs to be combined
