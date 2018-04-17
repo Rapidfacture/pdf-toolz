@@ -3,9 +3,9 @@ const path = require('path');
 const _ = require('lodash');
 const WithTmpDir = require('with-tmp-dir-promise').WithTempDir;
 const exec = require('mz/child_process').exec;
-const {requireExecutable} = require('./Utils');
+const {requireNativeExecutableSync} = require('require-native-executable');
 
-requireExecutable('convert');
+requireNativeExecutableSync('convert');
 
 async function pdfToImage (pdfBuf, imgtype = 'jpg', dpi = 200) {
     return WithTmpDir(async (tmpdir) => {

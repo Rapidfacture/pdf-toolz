@@ -30,6 +30,7 @@
     "lodash": "^4.17.5",
     "mz": "^2.7.0",
     "pdfjs-dist": "^2.0.489",
+    "require-native-executable": "^1.0.1",
     "shelljs": "^0.8.1",
     "with-tmp-dir-promise": "^1.0.1"
   },

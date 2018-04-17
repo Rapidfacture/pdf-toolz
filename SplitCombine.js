@@ -3,10 +3,10 @@ const WithTmpDir = require('with-tmp-dir-promise').WithTempDir;
 const exec = require('mz/child_process').exec;
 const path = require('path');
 const _ = require('lodash');
-const {requireExecutable} = require('./Utils');
+const {requireNativeExecutableSync} = require('require-native-executable');
 
-requireExecutable('sh');
-requireExecutable('pdftk');
+requireNativeExecutableSync('sh');
+requireNativeExecutableSync('pdftk');
 
 /**
  * Split PDF into individual pges
