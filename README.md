@@ -3,9 +3,21 @@ NodeJS PDF utilities. Requires NodeJS 7+ due to *async/await* support
 
 ## Installation
 
-```sh
-npm install mz pdf-toolz
-```
+> npm install mz pdf-toolz
+
+
+### Install external dependencys
+* ImageMagick => needed for PDF2Image
+* pdftk => needed for SplitCombine
+
+> sudo apt install imagemagick
+
+> sudo apt install pdftk
+
+An Error will be thrown if they are not present.
+
+
+## Usage
 
 ### Reading PDF page sizes
 
@@ -75,3 +87,8 @@ async function combinePDFs() {
 
 combinePDFs()
 ```
+
+
+## Testing
+
+> npm test
