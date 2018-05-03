@@ -58,7 +58,7 @@ async function splitPDFIntoPages() {
 splitPDFIntoPages()
 ```
 
-### Combining (appending) multiple PDFs into one
+### Combining (appending/joining/concatenating) multiple PDFs into one
 
 ```js
 const fs = require('mz/fs');
