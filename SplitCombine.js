@@ -5,8 +5,6 @@ const path = require('path');
 const _ = require('lodash');
 const {requireNativeExecutableSync} = require('require-native-executable');
 
-requireNativeExecutableSync('sh');
-requireNativeExecutableSync('pdftk');
 requireNativeExecutableSync('gs');
 
 /**
@@ -41,14 +39,13 @@ async function combinePDF (pdfBuffers) {
     return WithTmpDir(async (tmpdir) => {
         const outpath = path.join(tmpdir, `out.pdf`);
         // Write input files & assemble command.
-        let cmd = 'pdftk';
+        let cmd = `gs -sDEVICE=pdfwrite -dSAFER -dPDFSETTINGS=/prepress -o ${outpath}`;
         const promises = [];
         for (let i = 0; i < pdfBuffers.length; i++) {
             const pdfPath = path.join(tmpdir, `in-${i}.pdf`);
             promises.push(fs.writeFile(pdfPath, pdfBuffers[i]));
             cmd += ` ${pdfPath}`;
         }
-        cmd += ` output ${outpath}`;
         await Promise.all(promises);
         await exec(cmd);
         // Read the result file
