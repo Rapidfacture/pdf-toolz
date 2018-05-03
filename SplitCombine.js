@@ -26,7 +26,7 @@ async function splitPDF (pdfBuffer) {
         const pagePaths = pages.map(page => path.join(tmpdir, page));
         const pagePromises = pagePaths.map(jpg => fs.readFile(jpg));
         return Promise.all(pagePromises);
-    }, { unsafeCleanup: true, prefix: 'pdfoverlay-split-' });
+    }, { unsafeCleanup: true, prefix: 'pdftoolz-split-' });
 }
 
 /**
@@ -50,7 +50,7 @@ async function combinePDF (pdfBuffers) {
         await exec(cmd);
         // Read the result file
         return fs.readFile(outpath);
-    }, { unsafeCleanup: true, prefix: 'pdfoverlay-combine-' });
+    }, { unsafeCleanup: true, prefix: 'pdftoolz-combine-' });
 }
 
 module.exports = {

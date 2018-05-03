@@ -22,7 +22,7 @@ async function pdfToImage (pdfBuf, imgtype = 'jpg', dpi = 200) {
         const imgPaths = imgs.map(img => path.join(tmpdir, img));
         const imgPromises = imgPaths.map(img => fs.readFile(img));
         return Promise.all(imgPromises);
-    }, { unsafeCleanup: true, prefix: 'pdfoverlay-pdf2img-' });
+    }, { unsafeCleanup: true, prefix: 'pdftoolz-pdf2img-' });
 }
 
 // test().then(console.log).catch(console.error);
