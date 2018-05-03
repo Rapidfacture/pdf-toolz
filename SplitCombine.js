@@ -7,6 +7,7 @@ const {requireNativeExecutableSync} = require('require-native-executable');
 
 requireNativeExecutableSync('sh');
 requireNativeExecutableSync('pdftk');
+requireNativeExecutableSync('gs');
 
 /**
  * Split PDF into individual pges
@@ -19,11 +20,11 @@ async function splitPDF (pdfBuffer) {
         // Write input files
         await fs.writeFile(inpath, pdfBuffer);
         // Split. Burst into individual file
-        const cmd = `sh -c 'cd ${tmpdir} && pdftk in.pdf burst'`;
-        await exec(cmd);
+        const cmd = `gs -sDEVICE=pdfwrite -dSAFER -o page.%08d.pdf in.pdf`;
+        await exec(cmd, {cwd: tmpdir});
         // Read all the files, pg_0001.pdf, pg_0002.pdf
         const files = await fs.readdir(tmpdir);
-        const pages = files.filter(file => _.startsWith(file, 'pg_')).sort();
+        const pages = files.filter(file => _.startsWith(file, 'page.')).sort();
         const pagePaths = pages.map(page => path.join(tmpdir, page));
         const pagePromises = pagePaths.map(jpg => fs.readFile(jpg));
         return Promise.all(pagePromises);
