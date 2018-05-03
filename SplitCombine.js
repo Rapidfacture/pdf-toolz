@@ -20,7 +20,7 @@ async function splitPDF (pdfBuffer) {
         // Write input files
         await fs.writeFile(inpath, pdfBuffer);
         // Split. Burst into individual file
-        const cmd = `gs -sDEVICE=pdfwrite -dSAFER -o page.%08d.pdf in.pdf`;
+        const cmd = `gs -sDEVICE=pdfwrite -dSAFER -dPDFSETTINGS=/prepress -o page.%08d.pdf in.pdf`;
         await exec(cmd, {cwd: tmpdir});
         // Read all the files, pg_0001.pdf, pg_0002.pdf
         const files = await fs.readdir(tmpdir);
