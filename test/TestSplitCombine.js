@@ -2,7 +2,7 @@ const expect = require('chai').expect;
 const fs = require('mz/fs');
 const fileType = require('file-type');
 const {pdfPageSizes} = require('../PageSizes');
-const {splitPDF, combinePDF} = require('../SplitCombine');
+const {splitPDF, combinePDF, PDFCombineError} = require('../SplitCombine');
 
 describe('Split & Combine', function () {
     describe('Split', function () {
@@ -26,6 +26,11 @@ describe('Split & Combine', function () {
         });
     });
     describe('Combine', function () {
+        it('should throw when trying to combine zero pages', async function () {
+            combinePDF([]).then(() => {
+                throw new Error(`Didnt crash`);
+            }).catch(() => {});
+        });
         it('should combine one page into one page', async function () {
             const pdf = await fs.readFile('test/portrait-singlepage.pdf');
             const result = await combinePDF([pdf]);

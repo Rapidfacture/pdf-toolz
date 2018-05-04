@@ -29,6 +29,8 @@ async function splitPDF (pdfBuffer) {
     }, { unsafeCleanup: true, prefix: 'pdftoolz-split-' });
 }
 
+class PDFCombineError extends Error {}
+
 /**
  * Combine multiple documents into one PDF file.
  * Usually this is used to combine multiple PDF files into one.
@@ -36,6 +38,13 @@ async function splitPDF (pdfBuffer) {
  * @return Promise of combined PDF
  */
 async function combinePDF (pdfBuffers) {
+    if (pdfBuffers.length === 0) {
+        throw new PDFCombineError('Trying to combine a list of zero PDF buffers. Please add at least one PDF buffer!');
+    } else if (pdfBuffers.length === 1) {
+        // No need to combine
+        return pdfBuffers[0];
+    }
+    // Combine
     return WithTmpDir(async (tmpdir) => {
         const outpath = path.join(tmpdir, `out.pdf`);
         // Write input files & assemble command.
@@ -55,5 +64,6 @@ async function combinePDF (pdfBuffers) {
 
 module.exports = {
     splitPDF: splitPDF,
-    combinePDF: combinePDF
+    combinePDF: combinePDF,
+    PDFCombineError: PDFCombineError
 };
