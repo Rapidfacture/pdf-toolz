@@ -5,7 +5,7 @@ const WithTmpDir = require('with-tmp-dir-promise').WithTempDir;
 const exec = require('mz/child_process').exec;
 const {requireNativeExecutableSync} = require('require-native-executable');
 
-requireNativeExecutableSync('convert');
+requireNativeExecutableSync('gm');
 
 async function pdfToImage (pdfBuf, imgtype = 'jpg', dpi = 200) {
     return WithTmpDir(async (tmpdir) => {
@@ -14,7 +14,7 @@ async function pdfToImage (pdfBuf, imgtype = 'jpg', dpi = 200) {
         // Write input files
         await fs.writeFile(srcpath, pdfBuf);
         // Convert
-        const cmd = `convert -format ${imgtype} -density ${dpi} ${srcpath} -quality 95 ${outpath}`;
+        const cmd = `gm convert +adjoin -format ${imgtype} -density ${dpi} ${srcpath} -quality 95 ${outpath}`;
         await exec(cmd);
         // Read all the files
         const files = await fs.readdir(tmpdir);
