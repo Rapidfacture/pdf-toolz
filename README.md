@@ -7,10 +7,7 @@ NodeJS PDF utilities. Requires NodeJS 7+ due to *async/await* support
 
 
 ### Install external dependencys
-* ImageMagick => needed for PDF2Image
 * pdftk => needed for SplitCombine
-
-> sudo apt install imagemagick
 
 > sudo apt install pdftk
 
