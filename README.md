@@ -7,12 +7,18 @@ NodeJS PDF utilities. Requires NodeJS 7+ due to *async/await* support
 
 
 ### Install external dependencys
-* pdftk => needed for SplitCombine
-
+pdftk => needed for SplitCombine
 > sudo apt install pdftk
 
-An Error will be thrown if they are not present.
 
+pdfToImage needs graphicsmagick
+> sudo apt install graphicsmagick
+
+combinePDF needs ghostscript
+> sudo apt install ghostscript
+
+
+An Error will be thrown if they are not present.
 
 ## Usage
 

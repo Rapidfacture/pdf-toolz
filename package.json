@@ -1,6 +1,6 @@
 {
   "name": "pdf-toolz",
-  "version": "1.1.4",
+  "version": "1.1.5",
   "description": "NodeJS PDF utilities",
   "main": "index.js",
   "scripts": {
