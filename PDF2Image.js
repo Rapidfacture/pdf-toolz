@@ -2,8 +2,9 @@ const fs = require('mz/fs');
 const path = require('path');
 const _ = require('lodash');
 const WithTmpDir = require('with-tmp-dir-promise').WithTempDir;
-const exec = require('mz/child_process').exec;
+const exec = require('mz/child_process').execFile;
 const {requireNativeExecutableSync} = require('require-native-executable');
+const { execFile } = require('child_process');
 
 requireNativeExecutableSync('gm');
 
@@ -14,8 +15,9 @@ async function pdfToImage (pdfBuf, imgtype = 'jpg', dpi = 200) {
         // Write input files
         await fs.writeFile(srcpath, pdfBuf);
         // Convert
-        const cmd = `gm convert +adjoin -format ${imgtype} -density ${dpi} ${srcpath} -quality 95 ${outpath}`;
-        await exec(cmd);
+        var cmd = `gm convert +adjoin -format ${imgtype} -density ${dpi} ${srcpath} -quality 95 ${outpath}`;
+        cmd = cmd.split(' ');
+        await execFile(cmd[0], cmd.slice(1));
         // Read all the files
         const files = await fs.readdir(tmpdir);
         const imgs = files.filter(file => _.endsWith(file, `.${imgtype}`)).sort();
