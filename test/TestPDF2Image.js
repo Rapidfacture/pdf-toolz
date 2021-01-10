@@ -1,6 +1,6 @@
 const expect = require('chai').expect;
 const fs = require('mz/fs');
-const {pdfToImage} = require('../PDF2Image');
+const {pdfToImage, imageToPdf} = require('../PDF2Image');
 const fileType = require('file-type');
 
 describe('PDF2Image', function () {
@@ -40,6 +40,15 @@ describe('PDF2Image', function () {
             const pageImages = await pdfToImage(pdf, 'png', 50);
             // Check number of pages
             expect(pageImages.length).to.equal(3);
+        });
+    });
+
+    describe('imageToPdf', function () {
+        it('should produce a PDF for a png', async function () {
+            const pdf = await fs.readFile('test/sample.png');
+            const img = await imageToPdf(pdf);
+            // Check image type
+            expect(fileType(img).ext).to.equal('pdf');
         });
     });
 });
