@@ -1,5 +1,5 @@
 const fs = require('mz/fs');
-const WithTmpDir = require('with-tmp-dir-promise').WithTempDir;
+const withTmpDir = require('with-tmp-dir-promise').WithTempDir;
 const exec = require('mz/child_process').exec;
 const path = require('path');
 const _ = require('lodash');
@@ -13,7 +13,7 @@ requireNativeExecutableSync('gs');
  * @return Promise of array of individual page PDFs
  */
 async function splitPDF (pdfBuffer) {
-    return WithTmpDir(async (tmpdir) => {
+    return withTmpDir(async (tmpdir) => {
         const inpath = path.join(tmpdir, 'in.pdf');
         // Write input files
         await fs.writeFile(inpath, pdfBuffer);
@@ -45,7 +45,7 @@ async function combinePDF (pdfBuffers) {
         return pdfBuffers[0];
     }
     // Combine
-    return WithTmpDir(async (tmpdir) => {
+    return withTmpDir(async (tmpdir) => {
         const outpath = path.join(tmpdir, `out.pdf`);
         // Write input files & assemble command.
         let cmd = `gs -sDEVICE=pdfwrite -dSAFER -dPDFSETTINGS=/prepress -o ${outpath}`;
