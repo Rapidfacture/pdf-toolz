@@ -29,7 +29,14 @@
     "saveAs": true,
     "Blob": true,
     "marked": true,
-    "THREE": true
+    "THREE": true,
+
+     // mocha
+     "describe": true,
+     "it": true,
+     "after": true,
+     "before": true,
+     "done": true
   },
 
   "rules": {

@@ -1,7 +1,7 @@
 const expect = require('chai').expect;
 const fs = require('mz/fs');
 const {pdfToImage} = require('../PDF2Image');
-const fileType = require("file-type")
+const fileType = require('file-type');
 
 describe('PDF2Image', function () {
     describe('pdfToImage', function () {

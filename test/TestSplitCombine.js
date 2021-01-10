@@ -2,7 +2,7 @@ const expect = require('chai').expect;
 const fs = require('mz/fs');
 const fileType = require('file-type');
 const {pdfPageSizes} = require('../PageSizes');
-const {splitPDF, combinePDF, PDFCombineError} = require('../SplitCombine');
+const {splitPDF, combinePDF} = require('../SplitCombine');
 
 describe('Split & Combine', function () {
     describe('Split', function () {
