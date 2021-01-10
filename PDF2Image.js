@@ -34,7 +34,7 @@ async function pdfToImage (pdfBuf, imgtype = 'jpg', dpi = 200) {
 
 async function imageToPdf (buffer, opts) {
     return withTmpDir(async (tmpdir) => {
-        const srcpath = path.join(tmpdir, 'inPutImage');
+        const srcpath = path.join(tmpdir, 'imageToPdfInPutImage');
         const outpath = path.join(tmpdir, `out-%04d.pdf`);
         // Write input files
         await fs.writeFile(srcpath, buffer);
