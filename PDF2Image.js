@@ -15,7 +15,7 @@ async function pdfToImage (pdfBuf, imgtype = 'jpg', dpi = 200) {
         // Write input files
         await fs.writeFile(srcpath, pdfBuf);
         // Convert
-        var cmd = `gm convert +adjoin -format ${imgtype} -density ${dpi} ${srcpath} -quality 95 ${outpath}`;
+        var cmd = `gm convert +adjoin -trim -format ${imgtype} -density ${dpi} ${srcpath} -quality 95 ${outpath}`;
         cmd = cmd.split(' ');
         // execute the command reliable async using a promise
         await new Promise((resolve, reject) => {
